@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="5dp"
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Button for add palyer -->
+    <Button
+        android:id="@+id/main_add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/player"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <!-- Name of Player 1 -->
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.SQ.TextInputLayout.player"
+        android:id="@+id/layoutPlayer1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/main_margin_size"
+        android:hint="@string/main_hint_namePlayer1"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/main_add_button">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameOfPlayer1"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Name of Player 2 -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.SQ.TextInputLayout.player"
+        android:id="@+id/layoutPlayer2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/main_margin_size"
+        android:hint="@string/main_hint_namePlayer2"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/layoutPlayer1">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameOfPlayer2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Button start game -->
+    <Button
+        android:id="@+id/main_play_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
