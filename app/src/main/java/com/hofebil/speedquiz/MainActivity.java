@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button bt_launch_play;
     private Button bt_add_player;
     private Button bt_apply_player;
     private EditText player1;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar mainToolBar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolBar);
 
+        bt_launch_play = findViewById(R.id.main_play_button);
         bt_add_player = findViewById(R.id.main_player_button);
         bt_apply_player = findViewById(R.id.main_apply_button);
         player1 = findViewById(R.id.nameOfPlayer1);
@@ -45,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        bt_launch_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent ActivityIntent = new Intent(getApplicationContext(), GameActivity.class);
+                startActivity(ActivityIntent);
+            }
+        });
 
         bt_add_player.setOnClickListener(new View.OnClickListener() {
             @Override
