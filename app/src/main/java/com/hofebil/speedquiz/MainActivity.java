@@ -21,10 +21,12 @@ import com.google.android.material.textfield.TextInputLayout;
 public class MainActivity extends AppCompatActivity {
 
     private Button bt_add_player;
+    private Button bt_apply_player;
     private EditText player1;
     private EditText player2;
     private TextInputLayout layoutPlayer1;
     private TextInputLayout layoutPlayer2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar mainToolBar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolBar);
 
-        bt_add_player = findViewById(R.id.main_add_button);
+        bt_add_player = findViewById(R.id.main_player_button);
+        bt_apply_player = findViewById(R.id.main_apply_button);
         player1 = findViewById(R.id.nameOfPlayer1);
         player2 = findViewById(R.id.nameOfPlayer2);
         layoutPlayer1 = findViewById(R.id.layoutPlayer1);
@@ -47,9 +50,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (layoutPlayer1.getVisibility() == View.VISIBLE) {
+                    bt_apply_player.setVisibility(View.INVISIBLE);
                     layoutPlayer1.setVisibility(View.INVISIBLE);
                     layoutPlayer2.setVisibility(View.INVISIBLE);
                 } else {
+                    bt_apply_player.setVisibility(View.VISIBLE);
                     layoutPlayer1.setVisibility(View.VISIBLE);
                     layoutPlayer2.setVisibility(View.VISIBLE);
                 }

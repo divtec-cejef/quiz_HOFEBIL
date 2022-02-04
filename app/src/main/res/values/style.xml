@@ -22,5 +22,20 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+
     <!--TODO style pour les bouton-->
+
+    <!-- Style pour les bouton -->
+
+    <!-- marche pas pour l'instant -->
+    <style name="Widget.SQ.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- Style pour les bouton -->
+    <style name="Widget.SQ.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/black</item>
+        <item name="strokeColor">@color/littleWhite</item>
+    </style>
+
 </resources>
