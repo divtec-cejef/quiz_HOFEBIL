@@ -1,96 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            style="@style/Widget.SQ.appBar"
-            android:id="@+id/main_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:elevation="5dp"
-            android:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <!-- Button for add player name -->
-    <Button
-        style="@style/Widget.SQ.OutlinedButton"
-        android:id="@+id/main_player_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginStart="@dimen/main_margin_size"
-        android:text="@string/player"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <!-- Name of Player 1 -->
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.SQ.TextInputLayout.player"
-        android:id="@+id/layoutPlayer1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/main_margin_size"
-        android:hint="@string/main_hint_namePlayer1"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/main_player_button">
-
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/layoutToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/nameOfPlayer1"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <!-- Name of Player 2 -->
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.SQ.TextInputLayout.player"
-        android:id="@+id/layoutPlayer2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/main_margin_size"
-        android:hint="@string/main_hint_namePlayer2"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/layoutPlayer1">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameOfPlayer2"
+            <com.google.android.material.appbar.MaterialToolbar
+                style="@style/Widget.SQ.appBar"
+                android:id="@+id/main_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="5dp"
+                android:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Button for add player name -->
+        <Button
+            style="@style/Widget.SQ.OutlinedButton"
+            android:id="@+id/main_player_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_margin_size"
+            android:layout_marginStart="@dimen/main_margin_size"
+            android:text="@string/player"
+            app:layout_constraintTop_toBottomOf="@+id/layoutToolbar"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <!-- Name of Player 1 -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.SQ.TextInputLayout.player"
+            android:id="@+id/layoutPlayer1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_margin="@dimen/main_margin_size"
+            android:hint="@string/main_hint_namePlayer1"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/main_player_button">
 
-    <!-- Button for apply player -->
-    <Button
-        style="@style/Widget.SQ.OutlinedButton"
-        android:id="@+id/main_apply_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/main_margin_size"
-        android:visibility="invisible"
-        android:text="@string/applyPlayer"
-        app:layout_constraintTop_toBottomOf="@id/layoutPlayer2"
-        app:layout_constraintRight_toRightOf="parent"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nameOfPlayer1"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Button start game -->
-    <Button
-        style="@style/Widget.SQ.OutlinedButton"
-        android:id="@+id/main_play_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/play"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        <!-- Name of Player 2 -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.SQ.TextInputLayout.player"
+            android:id="@+id/layoutPlayer2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_margin_size"
+            android:hint="@string/main_hint_namePlayer2"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/layoutPlayer1">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameOfPlayer2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Button for apply player -->
+        <Button
+            style="@style/Widget.SQ.OutlinedButton"
+            android:id="@+id/main_apply_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_margin_size"
+            android:visibility="invisible"
+            android:text="@string/applyPlayer"
+            app:layout_constraintTop_toBottomOf="@id/layoutPlayer2"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <!-- Button start game -->
+        <Button
+            style="@style/Widget.SQ.OutlinedButton"
+            android:id="@+id/main_play_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/play"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Layout Parametre -->
+    <RelativeLayout
+        android:id="@+id/main_param_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="300dp"
+            android:minHeight="200dp"
+            android:layout_margin="5dp"
+            android:background="@color/cardview_dark_background">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/param_dayNight_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:checked="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/param_text_size"
+                android:text="Mode nuit "
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/TV_s_slide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:textSize="@dimen/param_text_size"
+                android:textColor="@color/white"
+                android:text="seconde par question"
+                app:layout_constraintTop_toBottomOf="@+id/param_dayNight_switch"/>
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/param_s_slide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:valueFrom="1.0"
+                android:valueTo="10.0"
+                android:stepSize="1.0"
+                android:value="8"
+                app:trackColorActive="@color/white"
+                app:trackColorInactive="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/TV_s_slide"/>
+
+            <!-- Bouton pour appliquer les changement -->
+            <Button
+                android:id="@+id/param_apply_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/main_margin_size"
+                android:layout_marginEnd="@dimen/main_margin_size"
+                android:layout_marginStart="@dimen/main_margin_size"
+                android:text="apply"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/littleWhite"
+                app:layout_constraintTop_toBottomOf="@id/param_s_slide"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <!-- Bouton pour annuler les changement -->
+            <Button
+                android:id="@+id/param_cancel_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/main_margin_size"
+                android:layout_marginEnd="@dimen/main_margin_size"
+                android:layout_marginStart="@dimen/main_margin_size"
+                android:text="Cancel"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/littleWhite"
+                app:layout_constraintTop_toBottomOf="@id/param_s_slide"
+                app:layout_constraintLeft_toLeftOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+</RelativeLayout>

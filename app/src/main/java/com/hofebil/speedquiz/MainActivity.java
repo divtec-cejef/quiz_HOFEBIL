@@ -28,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
     private EditText player2;
     private TextInputLayout layoutPlayer1;
     private TextInputLayout layoutPlayer2;
+    private View param_layout;
+
+    private Button bt_paramCancel;
+    private Button bt_paramApply;
+
+    private String name1;
+    private String name2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar mainToolBar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolBar);
 
+        bt_paramCancel = findViewById(R.id.param_cancel_button);
+        bt_paramApply = findViewById(R.id.param_apply_button);
         bt_launch_play = findViewById(R.id.main_play_button);
         bt_add_player = findViewById(R.id.main_player_button);
         bt_apply_player = findViewById(R.id.main_apply_button);
@@ -43,20 +52,50 @@ public class MainActivity extends AppCompatActivity {
         player2 = findViewById(R.id.nameOfPlayer2);
         layoutPlayer1 = findViewById(R.id.layoutPlayer1);
         layoutPlayer2 = findViewById(R.id.layoutPlayer2);
+        param_layout = findViewById(R.id.main_param_layout);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+        // ferme la page parametre
+        bt_paramCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                param_layout.setVisibility(View.GONE);
+            }
+        });
+
+        // sauvegarde les parametre
+        bt_paramApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                param_layout.setVisibility(View.GONE);
+            }
+        });
+
+        // sauvegarde des nom des joueur
+        bt_apply_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                name1 = player1.getText().toString();
+                name2 = player2.getText().toString();
+            }
+        });
+
+        // lancer la nouvelle activiy
         bt_launch_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent ActivityIntent = new Intent(getApplicationContext(), GameActivity.class);
+                ActivityIntent.putExtra("player1", name1);
+                ActivityIntent.putExtra("player2", name2);
                 startActivity(ActivityIntent);
             }
         });
 
+        // afficher/déafficher les paramêtre joueur
         bt_add_player.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,8 +124,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_parameter:
-                //TODO parametre / 1 option pour changer la vitesse des question et une autre pour changer theme nuit jour
-                break;
+                //TODO parametre / 1 option pour changer la vitesse des question et une autre pour changer theme nuit/jour
+                // ouverture des parametre
+                param_layout.setVisibility(View.VISIBLE);
             case R.id.action_question:
                 //TODO visualitation des question et possibilité d'en crée
                 break;
