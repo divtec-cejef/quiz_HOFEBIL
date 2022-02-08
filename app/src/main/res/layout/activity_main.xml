@@ -13,6 +13,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
+            style="@style/Widget.SQ.appBar"
             android:id="@+id/main_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -24,12 +25,12 @@
 
     <!-- Button for add player name -->
     <Button
-        style="Widget.SQ.TextButton"
+        style="@style/Widget.SQ.OutlinedButton"
         android:id="@+id/main_player_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:layout_marginRight="@dimen/main_margin_size"
+        android:layout_marginStart="@dimen/main_margin_size"
         android:text="@string/player"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -83,7 +84,7 @@
 
     <!-- Button start game -->
     <Button
-        style="Widget.SQ.TextButton"
+        style="@style/Widget.SQ.OutlinedButton"
         android:id="@+id/main_play_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

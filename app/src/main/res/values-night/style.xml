@@ -3,33 +3,34 @@
     <!-- Style général de l'application -->
     <style name="Theme.SQ" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customisation du theme -->
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorControlActivated">@color/black</item>
-        <item name="android:colorBackground">@color/white</item>
+        <item name="colorPrimary">@color/littleWhite</item>
+        <item name="colorControlActivated">@color/blue</item>
+        <item name="android:colorBackground">@color/hardBlue</item>
     </style>
 
     <!-- Style input text player -->
     <style name="Widget.SQ.TextInputLayout.player" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/littleWhite</item>
         <item name="boxStrokeWidth">1dp</item>
-        <item name="hintTextColor">@color/black</item>
+        <item name="hintTextColor">@color/white</item>
         <item name="hintTextAppearance">@style/TextAppearance.SQ.TextInputLayout.HintText</item>
         <item name="android:paddingBottom">8dp</item>
     </style>
 
     <!-- Style pour l'input text -->
     <style name="TextAppearance.SQ.TextInputLayout.HintText" parent="TextAppearance.MaterialComponents.Subtitle2">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/littleWhite</item>
     </style>
 
     <!-- Style pour les bouton -->
     <style name="Widget.SQ.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/white</item>
         <item name="strokeColor">@color/littleWhite</item>
     </style>
 
     <!-- Style pour la bar de navigation -->
     <style name="Widget.SQ.appBar" parent="Widget.MaterialComponents.AppBarLayout.Primary">
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/smartBlue</item>
     </style>
+
 </resources>
