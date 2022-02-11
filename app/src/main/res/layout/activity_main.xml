@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/nameOfPlayer1"
-                />
+                android:maxLength="10"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Name of Player 2 -->
@@ -73,7 +73,7 @@
                 android:id="@+id/nameOfPlayer2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:maxLength="10"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Button for apply player -->

@@ -12,4 +12,7 @@
     <string name="sQuestion">Number of seconds per question</string>
     <string name="errorNoPlayer">Players need a name</string>
     <string name="applyName">The game can begin</string>
+    <string name="btTru">TRUE</string>
+    <string name="menu">Menu</string>
+    <string name="again">Play again</string>
 </resources>

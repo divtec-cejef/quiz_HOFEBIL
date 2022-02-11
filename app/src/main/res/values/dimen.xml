@@ -6,5 +6,5 @@
     <dimen name="param_text_size">18sp</dimen>
 
     <!-- game -->
-
+    <dimen name="game_marign_site">20dp</dimen>
 </resources>

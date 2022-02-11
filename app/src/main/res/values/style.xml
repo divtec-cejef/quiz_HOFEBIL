@@ -22,12 +22,17 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <!-- Style pour les bouton -->
+    <!-- Style pour les bouton Outlined -->
     <style name="Widget.SQ.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textColor">@color/black</item>
         <item name="strokeColor">@color/littleWhite</item>
     </style>
 
+    <!-- Style pour les bouton contained-->
+    <style name="Widget.SQ.Button" parent="@style/Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/blue</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
     <!-- Style pour la bar de navigation -->
     <style name="Widget.SQ.appBar" parent="Widget.MaterialComponents.AppBarLayout.Primary">
         <item name="android:background">@color/white</item>
