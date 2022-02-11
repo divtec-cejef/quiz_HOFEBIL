@@ -58,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar mainToolBar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolBar);
 
+        nbSecond = findViewById(R.id.param_s_slide);
         sw_dayNight = findViewById(R.id.param_dayNight_switch);
         bt_paramCancel = findViewById(R.id.param_cancel_button);
         bt_paramApply = findViewById(R.id.param_apply_button);
+
         bt_launch_play = findViewById(R.id.main_play_button);
         bt_add_player = findViewById(R.id.main_player_button);
         bt_apply_player = findViewById(R.id.main_apply_button);
@@ -84,17 +86,10 @@ public class MainActivity extends AppCompatActivity {
         bt_paramApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                nombreSecondeQuestion = (int) nbSecond.getValue();
                 changeMode();
             }
         });
-
-        // bouton pour changer le dark mod
-        sw_dayNight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
 
         // ferme la page parametre
         bt_paramCancel.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 name1 = player1.getText().toString();
                 name2 = player2.getText().toString();
+                afficheSnakBar(R.string.applyName);
             }
         });
 
@@ -117,10 +113,15 @@ public class MainActivity extends AppCompatActivity {
         bt_launch_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent ActivityIntent = new Intent(getApplicationContext(), GameActivity.class);
-                ActivityIntent.putExtra("player1", name1);
-                ActivityIntent.putExtra("player2", name2);
-                startActivity(ActivityIntent);
+                if (name1 == null && name2 == null) {
+                    afficheSnakBar(R.string.errorNoPlayer);
+                } else {
+                    Intent ActivityIntent = new Intent(getApplicationContext(), GameActivity.class);
+                    ActivityIntent.putExtra("player1", name1);
+                    ActivityIntent.putExtra("player2", name2);
+                    ActivityIntent.putExtra("nombreSecondeQuestion", nombreSecondeQuestion);
+                    startActivity(ActivityIntent);
+                }
             }
         });
 
@@ -180,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
      * affiche une snackbar
      * @param message le message a mettre dans la snackBar
      */
-    private void afficheSnakBar(String message) {
+    private void afficheSnakBar(int message) {
         Snackbar snack = Snackbar.make(layout,message, Snackbar.LENGTH_LONG);
         View view = snack.getView();
         FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();

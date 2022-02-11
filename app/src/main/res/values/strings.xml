@@ -10,4 +10,6 @@
     <string name="cancel">Cancel</string>
     <string name="darkMod">Dark mode</string>
     <string name="sQuestion">Number of seconds per question</string>
+    <string name="errorNoPlayer">Players need a name</string>
+    <string name="applyName">The game can begin</string>
 </resources>
