@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SpeedQuiz</string>
+    <string name="question">Question</string>
+    <string name="parameter">Parametre</string>
+    <string name="player">Joueur</string>
+    <string name="play">Commencer</string>
+    <string name="main_hint_namePlayer1">Joueur 1</string>
+    <string name="main_hint_namePlayer2">Joueur 2</string>
+    <string name="apply">Appliquer</string>
+    <string name="cancel">Annuler</string>
+    <string name="darkMod">Mode sombre</string>
+    <string name="sQuestion">Nombre de seconde par question</string>
+    <string name="errorNoPlayer">Les joueur on besoin d\'un nom</string>
+    <string name="applyName">Le jeu peu commencer</string>
+</resources>

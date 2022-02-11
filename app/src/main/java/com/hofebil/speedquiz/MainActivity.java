@@ -103,9 +103,14 @@ public class MainActivity extends AppCompatActivity {
         bt_apply_player.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                name1 = player1.getText().toString();
-                name2 = player2.getText().toString();
-                afficheSnakBar(R.string.applyName);
+               if (player2.getText().toString().equals("") && player1.getText().toString().equals("")) {
+                    afficheSnakBar(R.string.errorNoPlayer);
+               } else {
+                   name1 = player1.getText().toString();
+                   name2 = player2.getText().toString();
+                   afficheSnakBar(R.string.applyName);
+               }
+
             }
         });
 
@@ -120,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     ActivityIntent.putExtra("player1", name1);
                     ActivityIntent.putExtra("player2", name2);
                     ActivityIntent.putExtra("nombreSecondeQuestion", nombreSecondeQuestion);
+                    ActivityIntent.putExtra("darkMode", sw_dayNight.isChecked());
                     startActivity(ActivityIntent);
                 }
             }
@@ -189,5 +195,4 @@ public class MainActivity extends AppCompatActivity {
         view.setLayoutParams(params);
         snack.show();
     }
-
 }
