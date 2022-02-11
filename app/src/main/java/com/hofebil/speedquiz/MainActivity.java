@@ -1,6 +1,7 @@
 package com.hofebil.speedquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,25 +18,38 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
+import androidx.appcompat.widget.SwitchCompat;
+
+import com.google.android.material.slider.Slider;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button bt_launch_play;
-    private Button bt_add_player;
-    private Button bt_apply_player;
+
+    private View layout;
     private EditText player1;
     private EditText player2;
     private TextInputLayout layoutPlayer1;
     private TextInputLayout layoutPlayer2;
+
     private View param_layout;
+    private SwitchCompat sw_dayNight;
+    private Button bt_paramApply;
+
+    private Button bt_launch_play;
+    private Button bt_add_player;
+    private Button bt_apply_player;
 
     private Button bt_paramCancel;
-    private Button bt_paramApply;
+    private Slider nbSecond;
 
     private String name1;
     private String name2;
+
+    private int nombreSecondeQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar mainToolBar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolBar);
 
+        sw_dayNight = findViewById(R.id.param_dayNight_switch);
         bt_paramCancel = findViewById(R.id.param_cancel_button);
         bt_paramApply = findViewById(R.id.param_apply_button);
         bt_launch_play = findViewById(R.id.main_play_button);
@@ -53,22 +69,35 @@ public class MainActivity extends AppCompatActivity {
         layoutPlayer1 = findViewById(R.id.layoutPlayer1);
         layoutPlayer2 = findViewById(R.id.layoutPlayer2);
         param_layout = findViewById(R.id.main_param_layout);
+        layout = findViewById(R.id.main_layout);
+
+        // applique les parametre de l'appareil a l'application
+        sw_dayNight.setChecked(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO);
+        changeMode();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        // ferme la page parametre
-        bt_paramCancel.setOnClickListener(new View.OnClickListener() {
+        // bouton qui applique les parametre
+        bt_paramApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                param_layout.setVisibility(View.GONE);
+                changeMode();
             }
         });
 
-        // sauvegarde les parametre
-        bt_paramApply.setOnClickListener(new View.OnClickListener() {
+        // bouton pour changer le dark mod
+        sw_dayNight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+
+        // ferme la page parametre
+        bt_paramCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 param_layout.setVisibility(View.GONE);
@@ -135,4 +164,29 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    /**
+     * change le mode d'affichage / jour nuit
+     */
+    private void changeMode() {
+        if (sw_dayNight.isChecked()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
+    /**
+     * affiche une snackbar
+     * @param message le message a mettre dans la snackBar
+     */
+    private void afficheSnakBar(String message) {
+        Snackbar snack = Snackbar.make(layout,message, Snackbar.LENGTH_LONG);
+        View view = snack.getView();
+        FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        view.setLayoutParams(params);
+        snack.show();
+    }
+
 }

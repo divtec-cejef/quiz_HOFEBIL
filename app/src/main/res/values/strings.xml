@@ -6,5 +6,8 @@
     <string name="play">Start</string>
     <string name="main_hint_namePlayer1">Player 1</string>
     <string name="main_hint_namePlayer2">Player 2</string>
-    <string name="applyPlayer">Apply</string>
+    <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
+    <string name="darkMod">Dark mode</string>
+    <string name="sQuestion">Number of seconds per question</string>
 </resources>

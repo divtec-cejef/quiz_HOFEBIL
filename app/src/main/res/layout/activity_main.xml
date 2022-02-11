@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -83,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/main_margin_size"
             android:visibility="invisible"
-            android:text="@string/applyPlayer"
+            android:text="@string/apply"
             app:layout_constraintTop_toBottomOf="@id/layoutPlayer2"
             app:layout_constraintRight_toRightOf="parent"/>
 
@@ -108,13 +109,11 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minWidth="300dp"
-            android:minHeight="200dp"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:background="@color/cardview_dark_background">
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/param_dayNight_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -122,7 +121,7 @@
                 android:checked="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/param_text_size"
-                android:text="Mode nuit "
+                android:text="@string/darkMod"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
@@ -134,7 +133,7 @@
                 android:layout_marginBottom="0dp"
                 android:textSize="@dimen/param_text_size"
                 android:textColor="@color/white"
-                android:text="seconde par question"
+                android:text="@string/sQuestion"
                 app:layout_constraintTop_toBottomOf="@+id/param_dayNight_switch"/>
 
             <com.google.android.material.slider.Slider
@@ -157,7 +156,7 @@
                 android:layout_margin="@dimen/main_margin_size"
                 android:layout_marginEnd="@dimen/main_margin_size"
                 android:layout_marginStart="@dimen/main_margin_size"
-                android:text="apply"
+                android:text="@string/apply"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/littleWhite"
                 app:layout_constraintTop_toBottomOf="@id/param_s_slide"
@@ -171,7 +170,7 @@
                 android:layout_margin="@dimen/main_margin_size"
                 android:layout_marginEnd="@dimen/main_margin_size"
                 android:layout_marginStart="@dimen/main_margin_size"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/littleWhite"
                 app:layout_constraintTop_toBottomOf="@id/param_s_slide"
