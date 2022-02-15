@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDelegate;
+
+import com.hofebil.speedquiz.Controllers.QuestionManager;
 
 public class GameActivity extends Activity {
 
@@ -20,6 +23,8 @@ public class GameActivity extends Activity {
 
     private boolean darkMode;
 
+    private TextView question1;
+    private TextView question2;
     private Button btVrai2;
     private Button btVrai1;
 
@@ -28,10 +33,14 @@ public class GameActivity extends Activity {
     private Button btMenu;
     private Button btAgain;
 
+    private QuestionManager myQuestion = new QuestionManager();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        myQuestion.addQuestion();
 
         btMenu = findViewById(R.id.fini_cancel_bt);
         btAgain = findViewById(R.id.fini_again_bt);
@@ -40,6 +49,8 @@ public class GameActivity extends Activity {
         btVrai1 = findViewById(R.id.game_bt_vrai_player1);
         player1 = findViewById(R.id.game_name_player1);
         player2 = findViewById(R.id.game_name_player2);
+        question1 = findViewById(R.id.game_question_player1);
+        question2 = findViewById(R.id.game_question_player2);
 
         // on récupère les valeur
         name1 = getIntent().getStringExtra("player1");
@@ -61,11 +72,19 @@ public class GameActivity extends Activity {
     protected void onStart() {
         super.onStart();
 
-        // bt test menu fin de jeu
+        //TODO ne pas oublier de modifier et mettre pareil que btVrai1
         btVrai2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finiLayout.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        //TODO afficher question
+        btVrai1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
@@ -73,17 +92,29 @@ public class GameActivity extends Activity {
         btMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(mainIntent);
+                finish();
             }
         });
 
         // bt retour au jeu
-        btMenu.setOnClickListener(new View.OnClickListener() {
+        btAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finiLayout.setVisibility(View.GONE);
+                restartGame();
             }
         });
+    }
+
+    private void restartGame() {
+        myQuestion.setNbQuestionPassed(0);
+    }
+
+    private void switchQuestion() {
+        if (!myQuestion.allQuestionPassed()) {
+            question1.setText(myQuestion.getMyQuestion().getQuestion());
+        } else {
+            finiLayout.setVisibility(View.VISIBLE);
+        }
     }
 }

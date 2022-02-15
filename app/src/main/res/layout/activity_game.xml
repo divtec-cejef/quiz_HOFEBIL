@@ -39,10 +39,9 @@
             android:id="@+id/game_bt_vrai_player1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/game_marign_site"
-            android:layout_marginEnd="@dimen/game_marign_site"
+            android:layout_margin="@dimen/game_marign_site"
             android:text="@string/btTru"
-            android:textSize="40sp"
+            android:textSize="@dimen/game_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -53,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/game_marign_site"
             android:text="@string/question"
-            android:textSize="40sp"
+            android:textSize="25sp"
             app:layout_constraintLeft_toRightOf="@id/game_name_player1"
             app:layout_constraintBottom_toTopOf="@id/game_bt_vrai_player1"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -91,11 +90,10 @@
             android:id="@+id/game_bt_vrai_player2"
             style="@style/Widget.SQ.Button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/game_marign_site"
-            android:layout_marginEnd="@dimen/game_marign_site"
+            android:layout_height="80dp"
+            android:layout_margin="@dimen/game_marign_site"
             android:text="@string/btTru"
-            android:textSize="40sp"
+            android:textSize="@dimen/game_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -106,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/game_marign_site"
             android:text="@string/question"
-            android:textSize="40sp"
+            android:textSize="25sp"
             app:layout_constraintBottom_toTopOf="@id/game_bt_vrai_player2"
             app:layout_constraintLeft_toRightOf="@id/game_name_player2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -119,15 +117,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/cardview_dark_background">
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/fini_cancel_bt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:textSize="40sp"
+                android:layout_marginStart="@dimen/menu_margin"
+                android:textSize="@dimen/game_text_size"
                 android:text="@string/menu"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -137,8 +134,8 @@
                 android:id="@+id/fini_again_bt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="100dp"
-                android:textSize="40sp"
+                android:layout_marginEnd="@dimen/menu_margin"
+                android:textSize="@dimen/game_text_size"
                 android:text="@string/again"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

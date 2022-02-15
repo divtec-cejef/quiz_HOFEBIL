@@ -5,12 +5,12 @@
 
     <application
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SQ"
-        android:dataExtractionRules="@xml/data_extraction_rules">
+        android:theme="@style/Theme.SQ">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -27,8 +27,7 @@
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
+            tools:ignore="LockedOrientationActivity"></activity>
     </application>
 
 </manifest>
