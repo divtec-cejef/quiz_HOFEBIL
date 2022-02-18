@@ -15,8 +15,10 @@
     <string name="btTru">TRUE</string>
     <string name="menu">Menu</string>
     <string name="again">Play again</string>
-    <string name="title_activity_question">QuestionActivity</string>
-    <string name="large_text">
+    <string name="start">Commencer !</string>
+
+    <string name="title_activity_question" translatable="false">QuestionActivity</string>
+    <string name="large_text" translatable="false">
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -105,5 +107,5 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings" translatable="false">Settings</string>
 </resources>

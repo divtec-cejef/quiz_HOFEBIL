@@ -16,4 +16,5 @@
     <string name="btTru">VRAI</string>
     <string name="menu">Menu</string>
     <string name="again">rejouer</string>
+    <string name="start">Commencer !</string>
 </resources>

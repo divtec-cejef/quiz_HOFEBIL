@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private String name1;
     private String name2;
 
-    private int nombreSecondeQuestion;
+    private int nombreSecondeQuestion = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

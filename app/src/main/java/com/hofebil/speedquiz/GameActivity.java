@@ -1,11 +1,9 @@
 package com.hofebil.speedquiz;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -16,20 +14,21 @@ public class GameActivity extends Activity {
 
     private String name1;
     private String name2;
-    private int nombreSecondeQuestion;
+    private int secondeParQuestion;
 
     private TextView player1;
     private TextView player2;
 
     private boolean darkMode;
 
-    private TextView question1;
-    private TextView question2;
+    public TextView question1;
+    public TextView question2;
     private Button btVrai2;
     private Button btVrai1;
 
     private View finiLayout;
 
+    private Button btStart;
     private Button btMenu;
     private Button btAgain;
 
@@ -42,6 +41,7 @@ public class GameActivity extends Activity {
 
         myQuestion.addQuestion();
 
+        btStart = findViewById(R.id.start_bt);
         btMenu = findViewById(R.id.fini_cancel_bt);
         btAgain = findViewById(R.id.fini_again_bt);
         finiLayout = findViewById(R.id.fini_layout);
@@ -55,7 +55,7 @@ public class GameActivity extends Activity {
         // on récupère les valeur
         name1 = getIntent().getStringExtra("player1");
         name2 = getIntent().getStringExtra("player2");
-        nombreSecondeQuestion = getIntent().getExtras().getInt("nombreSecondeQuestion");
+        secondeParQuestion = getIntent().getExtras().getInt("nombreSecondeQuestion");
         darkMode = getIntent().getExtras().getBoolean("darkMode");
 
         player2.setText(name2);
@@ -72,7 +72,7 @@ public class GameActivity extends Activity {
     protected void onStart() {
         super.onStart();
 
-        //TODO ne pas oublier de modifier et mettre pareil que btVrai1
+        //TODO implementation score
         btVrai2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,11 +80,21 @@ public class GameActivity extends Activity {
             }
         });
 
-        //TODO afficher question
+        //TODO implementation score
         btVrai1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+            }
+        });
+
+        // commence le jeu
+        btStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DefilementQuestion monDefilement = new DefilementQuestion(question1, question2, secondeParQuestion, myQuestion);
+                monDefilement.start();
+                btStart.setVisibility(View.GONE);
             }
         });
 
@@ -102,6 +112,7 @@ public class GameActivity extends Activity {
             public void onClick(View view) {
                 finiLayout.setVisibility(View.GONE);
                 restartGame();
+                btStart.setVisibility(View.VISIBLE);
             }
         });
     }

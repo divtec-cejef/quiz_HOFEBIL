@@ -109,6 +109,7 @@
             app:layout_constraintLeft_toRightOf="@id/game_name_player2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Menu de fin -->
     <RelativeLayout
         android:id="@+id/fini_layout"
         android:layout_width="match_parent"
@@ -141,7 +142,26 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/start_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/start_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/game_text_size"
+                android:text="@string/start"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </RelativeLayout>
 

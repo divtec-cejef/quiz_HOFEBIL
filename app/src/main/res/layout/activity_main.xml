@@ -143,7 +143,7 @@
                 android:valueFrom="1.0"
                 android:valueTo="10.0"
                 android:stepSize="1.0"
-                android:value="8"
+                android:value="1"
                 app:trackColorActive="@color/white"
                 app:trackColorInactive="@color/black"
                 app:layout_constraintTop_toBottomOf="@+id/TV_s_slide"/>
