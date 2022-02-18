@@ -1,7 +1,9 @@
 package com.hofebil.speedquiz;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -33,6 +35,8 @@ public class GameActivity extends Activity {
     private Button btAgain;
 
     private QuestionManager myQuestion = MainActivity.myQuestion;
+
+    Runnable questionRunnable=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +95,7 @@ public class GameActivity extends Activity {
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DefilementQuestion monDefilement = new DefilementQuestion(question1, question2, secondeParQuestion, myQuestion);
-                monDefilement.start();
+                defilQusetion();
                 btStart.setVisibility(View.GONE);
             }
         });
@@ -101,6 +104,7 @@ public class GameActivity extends Activity {
         btMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                restartGame();
                 finish();
             }
         });
@@ -120,11 +124,40 @@ public class GameActivity extends Activity {
         myQuestion.setNbQuestionPassed(0);
     }
 
-    private void switchQuestion() {
-        if (!myQuestion.allQuestionPassed()) {
-            question1.setText(myQuestion.getMyQuestion().getQuestion());
-        } else {
-            finiLayout.setVisibility(View.VISIBLE);
+    public void defilQusetion() {
+
+    Handler handler = new Handler();
+
+    questionRunnable = new Runnable() {
+
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void run() {
+            myQuestion.rollQuestion();
+            if(myQuestion.allQuestionPassed()){
+                question1.setText(myQuestion.getMyQuestion().getQuestion() + "fini");
+                question2.setText(myQuestion.getMyQuestion().getQuestion() + "fini");
+
+                // arrête le thread
+                handler.removeCallbacks(this);
+                try {
+                    Thread.sleep(1000L * secondeParQuestion);
+                    finiLayout.setVisibility(View.VISIBLE);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }else{
+                // code du thread
+                question1.setText(myQuestion.getMyQuestion().getQuestion());
+                question2.setText(myQuestion.getMyQuestion().getQuestion());
+
+                handler.postDelayed(this,1000L * secondeParQuestion);
+            }
         }
+    };
+
+    // lance le thread
+    handler.postDelayed(questionRunnable,1000);
     }
 }

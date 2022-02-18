@@ -18,6 +18,8 @@
     <string name="start">Start the game !</string>
     <string name="QFaux">false</string>
     <string name="QVrai">true</string>
+    <string name="QValidate">The question was added</string>
+    <string name="QNValidate">The question is not valid</string>
 
     <string name="title_activity_question" translatable="false">QuestionActivity</string>
     <string name="large_text" translatable="false">

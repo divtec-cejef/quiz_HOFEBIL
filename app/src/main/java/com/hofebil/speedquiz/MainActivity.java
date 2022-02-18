@@ -119,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!question_text.getText().toString().equals("")) {
                     myQuestion.setQuestion(question_text.getText().toString(), rbVrai.isChecked() ? 1:0);
+                    afficheSnakBar(R.string.QValidate);
+                } else {
+                    afficheSnakBar(R.string.QNValidate);
                 }
             }
         });

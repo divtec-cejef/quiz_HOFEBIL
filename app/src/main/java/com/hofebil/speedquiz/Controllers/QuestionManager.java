@@ -10,24 +10,23 @@ public class QuestionManager {
     private int nbQuestionPassed = 0;
 
     public void addQuestion() {
-        myQuestion.add(new Question("le chocolat peut posséder plusieurs couleurs", 1));
-        myQuestion.add(new Question("une couleur peut posséder plusieurs couleurs", 0));
-        myQuestion.add(new Question("les chats peuvent posséder plusieurs couleurs", 1));
-        myQuestion.add(new Question("l'air peut posséder plusieurs couleurs", 0));
-        myQuestion.add(new Question("une voiture peu posséder plusieurs couleurs", 1));
+        myQuestion.add(new Question("1le chocolat peut posséder plusieurs couleurs", 1));
+        myQuestion.add(new Question("2une couleur peut posséder plusieurs couleurs", 0));
+        myQuestion.add(new Question("3les chats peuvent posséder plusieurs couleurs", 1));
+        myQuestion.add(new Question("4l'air peut posséder plusieurs couleurs", 0));
+        myQuestion.add(new Question("5une Toyota AE86 est disponible en plusieurs couleurs", 1));
     }
 
     public void setQuestion(String question, int reponse) {
         myQuestion.add(new Question(question, reponse));
     }
 
-    private void choseQuestion() {
+    public void rollQuestion() {
+        nbQuestionPassed++;
         indexQuestion = (int) (Math.random()* myQuestion.size());
     }
 
     public Question getMyQuestion() {
-        choseQuestion();
-        nbQuestionPassed++;
         return myQuestion.get(indexQuestion);
     }
 
