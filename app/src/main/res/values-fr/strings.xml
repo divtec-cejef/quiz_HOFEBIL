@@ -18,5 +18,5 @@
     <string name="again">rejouer</string>
     <string name="start">Commencer !</string>
     <string name="QFaux">faux</string>
-    <string name="QVrau">vrai</string>
+    <string name="QVrai">vrai</string>
 </resources>

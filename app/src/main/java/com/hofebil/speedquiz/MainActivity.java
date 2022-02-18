@@ -20,6 +20,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
 
 import androidx.appcompat.widget.SwitchCompat;
 
@@ -33,12 +34,15 @@ import java.io.Serializable;
 public class MainActivity extends AppCompatActivity {
 
 
+    public static QuestionManager myQuestion = new QuestionManager();
     private View layout;
     private EditText player1;
     private EditText player2;
     private TextInputLayout layoutPlayer1;
     private TextInputLayout layoutPlayer2;
 
+    private RadioButton rbVrai;
+    private EditText question_text;
     private View question_layout;
     private Button question_cancel;
     private Button question_apply;
@@ -55,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
     private String name1;
     private String name2;
-
-   private QuestionManager myQuestion = new QuestionManager();
 
     private int nombreSecondeQuestion = 1;
 
@@ -76,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         bt_paramApply = findViewById(R.id.param_apply_button);
         question_cancel = findViewById(R.id.question_cancel_button);
         question_apply = findViewById(R.id.question_apply_button);
+        question_text = findViewById(R.id.question_text_et);
+        rbVrai = findViewById(R.id.rb_vrai);
 
         bt_launch_play = findViewById(R.id.main_play_button);
         bt_add_player = findViewById(R.id.main_player_button);
@@ -87,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
         param_layout = findViewById(R.id.main_param_layout);
         question_layout = findViewById(R.id.main_question_layout);
         layout = findViewById(R.id.main_layout);
+
+
 
         // applique les parametre de l'appareil a l'application
         sw_dayNight.setChecked(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO);
@@ -108,10 +114,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // bouton qui applique les question
-        bt_paramApply.setOnClickListener(new View.OnClickListener() {
+        question_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myQuestion.setQuestion("3", 1);
+                if (!question_text.getText().toString().equals("")) {
+                    myQuestion.setQuestion(question_text.getText().toString(), rbVrai.isChecked() ? 1:0);
+                }
             }
         });
 
@@ -124,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // ferme la page question
-        bt_paramCancel.setOnClickListener(new View.OnClickListener() {
+        question_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 question_layout.setVisibility(View.GONE);

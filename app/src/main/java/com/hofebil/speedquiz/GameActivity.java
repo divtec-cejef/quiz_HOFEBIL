@@ -32,8 +32,7 @@ public class GameActivity extends Activity {
     private Button btMenu;
     private Button btAgain;
 
-    // question
-    private QuestionManager myQuestion = new QuestionManager();
+    private QuestionManager myQuestion = MainActivity.myQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,6 @@ public class GameActivity extends Activity {
         darkMode = getIntent().getExtras().getBoolean("darkMode");
 
         player2.setText(name2);
-        myQuestion.addQuestion();
         player1.setText(name1);
 
         if (darkMode) {
