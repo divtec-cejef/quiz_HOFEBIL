@@ -17,4 +17,6 @@
     <string name="menu">Menu</string>
     <string name="again">rejouer</string>
     <string name="start">Commencer !</string>
+    <string name="QFaux">faux</string>
+    <string name="QVrau">vrai</string>
 </resources>

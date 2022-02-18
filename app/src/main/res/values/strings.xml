@@ -15,7 +15,9 @@
     <string name="btTru">TRUE</string>
     <string name="menu">Menu</string>
     <string name="again">Play again</string>
-    <string name="start">Commencer !</string>
+    <string name="start">Start the game !</string>
+    <string name="QFaux">false</string>
+    <string name="QVrau">true</string>
 
     <string name="title_activity_question" translatable="false">QuestionActivity</string>
     <string name="large_text" translatable="false">

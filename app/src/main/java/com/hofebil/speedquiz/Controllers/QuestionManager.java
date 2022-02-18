@@ -17,6 +17,10 @@ public class QuestionManager {
         myQuestion.add(new Question("une voiture peu posséder plusieurs couleurs", 1));
     }
 
+    public void setQuestion(String question, int reponse) {
+        myQuestion.add(new Question(question, reponse));
+    }
+
     private void choseQuestion() {
         indexQuestion = (int) (Math.random()* myQuestion.size());
     }

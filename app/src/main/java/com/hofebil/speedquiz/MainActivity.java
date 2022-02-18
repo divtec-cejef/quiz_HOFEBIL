@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +26,9 @@ import androidx.appcompat.widget.SwitchCompat;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.hofebil.speedquiz.Controllers.QuestionManager;
+
+import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private TextInputLayout layoutPlayer1;
     private TextInputLayout layoutPlayer2;
 
+    private View question_layout;
+    private Button question_cancel;
+    private Button question_apply;
     private View param_layout;
     private SwitchCompat sw_dayNight;
     private Button bt_paramApply;
@@ -49,12 +56,17 @@ public class MainActivity extends AppCompatActivity {
     private String name1;
     private String name2;
 
+   private QuestionManager myQuestion = new QuestionManager();
+
     private int nombreSecondeQuestion = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        myQuestion.addQuestion();
+
         Toolbar mainToolBar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolBar);
 
@@ -62,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         sw_dayNight = findViewById(R.id.param_dayNight_switch);
         bt_paramCancel = findViewById(R.id.param_cancel_button);
         bt_paramApply = findViewById(R.id.param_apply_button);
+        question_cancel = findViewById(R.id.question_cancel_button);
+        question_apply = findViewById(R.id.question_apply_button);
 
         bt_launch_play = findViewById(R.id.main_play_button);
         bt_add_player = findViewById(R.id.main_player_button);
@@ -71,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         layoutPlayer1 = findViewById(R.id.layoutPlayer1);
         layoutPlayer2 = findViewById(R.id.layoutPlayer2);
         param_layout = findViewById(R.id.main_param_layout);
+        question_layout = findViewById(R.id.main_question_layout);
         layout = findViewById(R.id.main_layout);
 
         // applique les parametre de l'appareil a l'application
@@ -88,6 +103,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 nombreSecondeQuestion = (int) nbSecond.getValue();
                 changeMode();
+
+            }
+        });
+
+        // bouton qui applique les question
+        bt_paramApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myQuestion.setQuestion("3", 1);
             }
         });
 
@@ -96,6 +120,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 param_layout.setVisibility(View.GONE);
+            }
+        });
+
+        // ferme la page question
+        bt_paramCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                question_layout.setVisibility(View.GONE);
             }
         });
 
@@ -160,11 +192,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_parameter:
-                //TODO parametre / 1 option pour changer la vitesse des question et une autre pour changer theme nuit/jour
                 // ouverture des parametre
                 param_layout.setVisibility(View.VISIBLE);
+                break;
             case R.id.action_question:
-                //TODO visualitation des question et possibilité d'en crée
+                // ouverture des question
+                question_layout.setVisibility(View.VISIBLE);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

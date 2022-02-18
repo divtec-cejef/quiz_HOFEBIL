@@ -39,7 +39,6 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        myQuestion.addQuestion();
 
         btStart = findViewById(R.id.start_bt);
         btMenu = findViewById(R.id.fini_cancel_bt);
@@ -59,6 +58,7 @@ public class GameActivity extends Activity {
         darkMode = getIntent().getExtras().getBoolean("darkMode");
 
         player2.setText(name2);
+        myQuestion.addQuestion();
         player1.setText(name1);
 
         if (darkMode) {
