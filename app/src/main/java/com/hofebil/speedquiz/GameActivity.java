@@ -32,6 +32,7 @@ public class GameActivity extends Activity {
     private Button btMenu;
     private Button btAgain;
 
+    // question
     private QuestionManager myQuestion = new QuestionManager();
 
     @Override
