@@ -34,7 +34,7 @@ public class GameActivity extends Activity {
     private Button btMenu;
     private Button btAgain;
 
-    private QuestionManager myQuestion = MainActivity.myQuestion;
+    private QuestionManager myQuestion = new QuestionManager(getApplicationContext());
 
     Runnable questionRunnable=null;
 
@@ -135,22 +135,15 @@ public class GameActivity extends Activity {
         public void run() {
             myQuestion.rollQuestion();
             if(myQuestion.allQuestionPassed()){
-                question1.setText(myQuestion.getMyQuestion().getQuestion() + "fini");
-                question2.setText(myQuestion.getMyQuestion().getQuestion() + "fini");
+                question1.setText(" fini");
+                question2.setText(" fini");
 
-                // arrête le thread
                 handler.removeCallbacks(this);
-                try {
-                    Thread.sleep(1000L * secondeParQuestion);
-                    finiLayout.setVisibility(View.VISIBLE);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
+                finiLayout.setVisibility(View.VISIBLE);
             }else{
                 // code du thread
-                question1.setText(myQuestion.getMyQuestion().getQuestion());
-                question2.setText(myQuestion.getMyQuestion().getQuestion());
+                question1.setText(myQuestion.getQuestionList().getQuestion());
+                question2.setText(myQuestion.getQuestionList().getQuestion());
 
                 handler.postDelayed(this,1000L * secondeParQuestion);
             }
@@ -158,6 +151,10 @@ public class GameActivity extends Activity {
     };
 
     // lance le thread
-    handler.postDelayed(questionRunnable,1000);
+    handler.postDelayed(questionRunnable,500);
+
+    }
+
+    public void jeu() {
     }
 }

@@ -28,13 +28,14 @@ import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.hofebil.speedquiz.Controllers.QuestionManager;
+import com.hofebil.speedquiz.Models.SpeedQuizSQLiteOpenHelper;
 
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 
+    private QuestionManager myQuestion = new QuestionManager(getApplicationContext());
 
-    public static QuestionManager myQuestion = new QuestionManager();
     private View layout;
     private EditText player1;
     private EditText player2;
@@ -66,8 +67,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        myQuestion.addQuestion();
 
         Toolbar mainToolBar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolBar);
@@ -118,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!question_text.getText().toString().equals("")) {
-                    myQuestion.setQuestion(question_text.getText().toString(), rbVrai.isChecked() ? 1:0);
+                    //TODO ajouter question
+                    // myQuestion.setQuestion(question_text.getText().toString(), rbVrai.isChecked() ? 1:0);
                     afficheSnakBar(R.string.QValidate);
                 } else {
                     afficheSnakBar(R.string.QNValidate);
