@@ -11,16 +11,18 @@ import java.util.ArrayList;
 
 public class QuestionManager {
     ArrayList<Question> questionList = new ArrayList<>();
-    private int indexQuestion;
+    private int indexQuestion = 0;
     private int nbQuestionPassed = 0;
+    private Context c;
 
     public QuestionManager(Context context) {
         questionList = initQuestionList(context);
     }
 
     private ArrayList<Question> initQuestionList(Context context) {
+        c = context;
         ArrayList<Question> listQuestion = new ArrayList<>();
-        SpeedQuizSQLiteOpenHelper helper = new SpeedQuizSQLiteOpenHelper(context);
+        SpeedQuizSQLiteOpenHelper helper = new SpeedQuizSQLiteOpenHelper(c);
         SQLiteDatabase db = helper.getReadableDatabase();
 
         Cursor cursor = db.query(true, "quiz", new String[]{"idQuiz", "question", "reponse"}, null, null, null, null, "idQuiz", null);
@@ -35,15 +37,18 @@ public class QuestionManager {
     }
 
     public void setQuestion(String question, int reponse) {
+        SpeedQuizSQLiteOpenHelper helper = new SpeedQuizSQLiteOpenHelper(c);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.execSQL("INSERT INTO quiz(question, reponse) VALUES(question, reponse)");
         questionList.add(new Question(question, reponse));
     }
 
     public void rollQuestion() {
         nbQuestionPassed++;
-        indexQuestion = (int) (Math.random()* questionList.size());
+        indexQuestion = (int) (Math.random() * questionList.size()) == indexQuestion ? (int) (Math.random() * questionList.size()) : indexQuestion;
     }
 
-    public Question getQuestionList() {
+    public Question getQuestion() {
         return questionList.get(indexQuestion);
     }
 

@@ -34,7 +34,7 @@ public class GameActivity extends Activity {
     private Button btMenu;
     private Button btAgain;
 
-    private QuestionManager myQuestion = new QuestionManager(getApplicationContext());
+    private QuestionManager myQuestion;
 
     Runnable questionRunnable=null;
 
@@ -43,6 +43,7 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        myQuestion  = new QuestionManager(GameActivity.this);
 
         btStart = findViewById(R.id.start_bt);
         btMenu = findViewById(R.id.fini_cancel_bt);
@@ -87,7 +88,9 @@ public class GameActivity extends Activity {
         btVrai1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (myQuestion.getQuestion().getReponse() == 1) {
+                    // ++
+                }
             }
         });
 
@@ -142,8 +145,8 @@ public class GameActivity extends Activity {
                 finiLayout.setVisibility(View.VISIBLE);
             }else{
                 // code du thread
-                question1.setText(myQuestion.getQuestionList().getQuestion());
-                question2.setText(myQuestion.getQuestionList().getQuestion());
+                question1.setText(myQuestion.getQuestion().getQuestion());
+                question2.setText(myQuestion.getQuestion().getQuestion());
 
                 handler.postDelayed(this,1000L * secondeParQuestion);
             }
@@ -153,8 +156,5 @@ public class GameActivity extends Activity {
     // lance le thread
     handler.postDelayed(questionRunnable,500);
 
-    }
-
-    public void jeu() {
     }
 }
