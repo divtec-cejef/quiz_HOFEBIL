@@ -12,8 +12,9 @@ public class Question {
 
     /**
      * constructeur d'une question
+     *
      * @param question la question
-     * @param reponse sa reponse
+     * @param reponse  sa reponse
      */
     public Question(String question, int reponse) {
         this.question = question;
@@ -22,6 +23,7 @@ public class Question {
 
     /**
      * constructeur d'une question
+     *
      * @param cursor resultat d'une query
      */
     public Question(Cursor cursor) {

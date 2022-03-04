@@ -34,7 +34,7 @@ import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 
-   private QuestionManager myQuestion;
+    private QuestionManager myQuestion;
 
     private View layout;
     private EditText player1;
@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         layout = findViewById(R.id.main_layout);
 
 
-
         // applique les parametre de l'appareil a l'application
         sw_dayNight.setChecked(AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO);
         changeMode();
@@ -110,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 nombreSecondeQuestion = (int) nbSecond.getValue();
                 changeMode();
-
             }
         });
 
@@ -119,8 +117,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!question_text.getText().toString().equals("")) {
-                    //TODO ajouter question
-                    myQuestion.setQuestion(question_text.getText().toString(), rbVrai.isChecked() ? 1:0);
+                    myQuestion.setQuestion(question_text.getText().toString(), rbVrai.isChecked() ? 1 : 0);
                     afficheSnakBar(R.string.QValidate);
                 } else {
                     afficheSnakBar(R.string.QNValidate);
@@ -148,13 +145,13 @@ public class MainActivity extends AppCompatActivity {
         bt_apply_player.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if (player2.getText().toString().equals("") && player1.getText().toString().equals("")) {
+                if (player2.getText().toString().equals("") && player1.getText().toString().equals("")) {
                     afficheSnakBar(R.string.errorNoPlayer);
-               } else {
-                   name1 = player1.getText().toString();
-                   name2 = player2.getText().toString();
-                   afficheSnakBar(R.string.applyName);
-               }
+                } else {
+                    name1 = player1.getText().toString();
+                    name2 = player2.getText().toString();
+                    afficheSnakBar(R.string.applyName);
+                }
 
             }
         });
@@ -231,12 +228,13 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * affiche une snackbar
+     *
      * @param message le message a mettre dans la snackBar
      */
     private void afficheSnakBar(int message) {
-        Snackbar snack = Snackbar.make(layout,message, Snackbar.LENGTH_LONG);
+        Snackbar snack = Snackbar.make(layout, message, Snackbar.LENGTH_LONG);
         View view = snack.getView();
-        FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
         params.gravity = Gravity.TOP;
         view.setLayoutParams(params);
         snack.show();

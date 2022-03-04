@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import com.hofebil.speedquiz.Models.Question;
 import com.hofebil.speedquiz.Models.SpeedQuizSQLiteOpenHelper;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -16,26 +19,27 @@ public class QuestionManager {
     ArrayList<Question> questionList = new ArrayList<>();
     ArrayList<Question> questionListCopy = new ArrayList<>();
     private int indexQuestion = 0;
-    private Context c;
+    private SpeedQuizSQLiteOpenHelper helper;
 
     /**
      * constructeur du controleur
+     *
      * @param context le context de l'application
      */
     public QuestionManager(Context context) {
         questionList = initQuestionList(context);
-        questionListCopy = (ArrayList<Question>)questionList.clone();
+        questionListCopy = (ArrayList<Question>) questionList.clone();
     }
 
     /**
      * initialise les question
+     *
      * @param context le context de l'application
      * @return une liste de question
      */
     private ArrayList<Question> initQuestionList(Context context) {
-        c = context;
         ArrayList<Question> listQuestion = new ArrayList<>();
-        SpeedQuizSQLiteOpenHelper helper = new SpeedQuizSQLiteOpenHelper(c);
+         helper = new SpeedQuizSQLiteOpenHelper(context);
         SQLiteDatabase db = helper.getReadableDatabase();
 
         Cursor cursor = db.query(true, "quiz", new String[]{"idQuiz", "question", "reponse"}, null, null, null, null, "idquiz", null);
@@ -51,14 +55,16 @@ public class QuestionManager {
 
     /**
      * ajoute une question dans la base de donnée
+     *
      * @param question la question
-     * @param reponse sa reponse
+     * @param reponse  sa reponse
      */
     public void setQuestion(String question, int reponse) {
-        SpeedQuizSQLiteOpenHelper helper = new SpeedQuizSQLiteOpenHelper(c);
         SQLiteDatabase db = helper.getWritableDatabase();
         db.execSQL("INSERT INTO quiz(question, reponse) VALUES(question, reponse)");
         questionList.add(new Question(question, reponse));
+        restart();
+        db.close();
     }
 
     /**
@@ -70,11 +76,12 @@ public class QuestionManager {
 
     /**
      * obtien une question
+     *
      * @return une question
      */
     public Question getQuestion() {
         Question question = questionListCopy.get(indexQuestion);
-  //      Question question = questionList.get(indexQuestion);
+        //      Question question = questionList.get(indexQuestion);
         return question;
     }
 
@@ -87,6 +94,7 @@ public class QuestionManager {
 
     /**
      * test si la liste de question est vide
+     *
      * @return vrai si oui, sinon faux
      */
     public boolean allQuestionPassed() {
@@ -97,6 +105,21 @@ public class QuestionManager {
      * re charge la liste
      */
     public void restart() {
-        questionListCopy = (ArrayList<Question>)questionList.clone();
+        questionListCopy = (ArrayList<Question>) questionList.clone();
     }
+
+    private Connection connect() {
+        // SQLite connection string
+        String url = "jdbc:sqlite:C://sqlite/db/test.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
+
 }
+
+
