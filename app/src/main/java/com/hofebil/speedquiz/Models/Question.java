@@ -15,7 +15,6 @@ public class Question {
         this.reponse = reponse;
     }
 
-    @SuppressLint("Range")
     public Question(Cursor cursor) {
         question = cursor.getString(cursor.getColumnIndexOrThrow("question"));
         reponse = cursor.getInt(cursor.getColumnIndexOrThrow("reponse"));

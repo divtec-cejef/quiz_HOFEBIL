@@ -5,11 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class SpeedQuizSQLiteOpenHelper extends SQLiteOpenHelper {
-    static String DB_NAME="SpeedQuiz.db";
-    static int DB_VERSION=1;
+    static String DB_NAME = "SpeedQuiz.db";
+    static int DB_VERSION = 1;
 
     public SpeedQuizSQLiteOpenHelper(Context context) {
-        super(context,DB_NAME, null, DB_VERSION);
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
     @Override
@@ -19,10 +19,12 @@ public class SpeedQuizSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO quiz VALUES(1,\"le chocolat peut posséder plusieurs couleurs\", 1)");
         db.execSQL("INSERT INTO quiz VALUES(2,\"une couleur peut posséder plusieurs couleurs\", 0)");
         db.execSQL("INSERT INTO quiz VALUES(3,\"les chats peuvent posséder plusieurs couleurs\", 1)");
-        db.execSQL("INSERT INTO quiz VALUES(4,\"l'air peut posséder plusieurs couleurs\", 0)");
         db.execSQL("INSERT INTO quiz VALUES(5,\"une Toyota AE86 est disponible en plusieurs couleurs\", 1)");
+        db.execSQL("INSERT INTO quiz VALUES(4,\"l'air peut posséder plusieurs couleurs\", 0)");
+
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {}
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+    }
 }

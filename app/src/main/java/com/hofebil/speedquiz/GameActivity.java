@@ -4,24 +4,36 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.hofebil.speedquiz.Controllers.QuestionManager;
+import com.hofebil.speedquiz.Models.Question;
 
 public class GameActivity extends Activity {
 
     private String name1;
     private String name2;
     private int secondeParQuestion;
+    private boolean canClick = false;
+    private String question;
 
     private TextView player1;
     private TextView player2;
+    private boolean enTrainDeJouer = false;
 
     private boolean darkMode;
+
+    private TextView tvScorePlayer1;
+    private TextView tvScorePlayer2;
+    private int scorePlayer1 = 0;
+    private int scorePlayer2 = 0;
 
     public TextView question1;
     public TextView question2;
@@ -36,14 +48,14 @@ public class GameActivity extends Activity {
 
     private QuestionManager myQuestion;
 
-    Runnable questionRunnable=null;
+    Runnable questionRunnable = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        myQuestion  = new QuestionManager(GameActivity.this);
+        myQuestion = new QuestionManager(GameActivity.this);
 
         btStart = findViewById(R.id.start_bt);
         btMenu = findViewById(R.id.fini_cancel_bt);
@@ -55,6 +67,8 @@ public class GameActivity extends Activity {
         player2 = findViewById(R.id.game_name_player2);
         question1 = findViewById(R.id.game_question_player1);
         question2 = findViewById(R.id.game_question_player2);
+        tvScorePlayer1 = findViewById(R.id.game_score_player1);
+        tvScorePlayer2 = findViewById(R.id.game_score_player2);
 
         // on récupère les valeur
         name1 = getIntent().getStringExtra("player1");
@@ -76,20 +90,34 @@ public class GameActivity extends Activity {
     protected void onStart() {
         super.onStart();
 
-        //TODO implementation score
+        //implementation du score
         btVrai2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (enTrainDeJouer) {
+                    if (canClick) {
+                        if (myQuestion.getQuestion().getReponse() == 1) {
+                            scorePlayer2++;
+                            tvScorePlayer2.setText(String.valueOf(scorePlayer2));
+                            canClick = false;
+                        }
+                    }
+                }
             }
         });
 
-        //TODO implementation score
+        // implementation du score
         btVrai1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (myQuestion.getQuestion().getReponse() == 1) {
-                    // ++
+                if (enTrainDeJouer) {
+                    if (canClick) {
+                        if (myQuestion.getQuestion().getReponse() == 1) {
+                            scorePlayer1++;
+                            tvScorePlayer1.setText(String.valueOf(scorePlayer1));
+                            canClick = false;
+                        }
+                    }
                 }
             }
         });
@@ -124,37 +152,43 @@ public class GameActivity extends Activity {
     }
 
     private void restartGame() {
-        myQuestion.setNbQuestionPassed(0);
+        myQuestion.restart();
+        scorePlayer1 = 0;
+        scorePlayer2 = 0;
     }
 
     public void defilQusetion() {
+        Handler handler = new Handler();
+        questionRunnable = new Runnable() {
 
-    Handler handler = new Handler();
+            @Override
+            public void run() {
+                myQuestion.rollQuestion();
 
-    questionRunnable = new Runnable() {
+                if (myQuestion.allQuestionPassed()) {
+                    question1.setText(" fini");
+                    question2.setText(" fini");
+                    enTrainDeJouer = false;
+                    canClick = false;
 
-        @SuppressLint("SetTextI18n")
-        @Override
-        public void run() {
-            myQuestion.rollQuestion();
-            if(myQuestion.allQuestionPassed()){
-                question1.setText(" fini");
-                question2.setText(" fini");
+                    handler.removeCallbacks(this);
+                    finiLayout.setVisibility(View.VISIBLE);
+                } else {
+                    // code du thread
+                    question = myQuestion.getQuestion().getQuestion();
+                    canClick = true;
+                    question1.setText(question);
+                    question2.setText(question);
 
-                handler.removeCallbacks(this);
-                finiLayout.setVisibility(View.VISIBLE);
-            }else{
-                // code du thread
-                question1.setText(myQuestion.getQuestion().getQuestion());
-                question2.setText(myQuestion.getQuestion().getQuestion());
-
-                handler.postDelayed(this,1000L * secondeParQuestion);
+                    handler.postDelayed(this, 1000L * secondeParQuestion);
+                    canClick = false;
+                    myQuestion.removeQuestion();
+                }
             }
-        }
-    };
-
-    // lance le thread
-    handler.postDelayed(questionRunnable,500);
-
+        };
+        // lance le thread
+        handler.postDelayed(questionRunnable, 500);
+        enTrainDeJouer = true;
+        canClick = true;
     }
 }
