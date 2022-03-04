@@ -1,27 +1,23 @@
 package com.hofebil.speedquiz;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.hofebil.speedquiz.Controllers.QuestionManager;
-import com.hofebil.speedquiz.Models.Question;
+
+import java.util.concurrent.locks.LockSupport;
 
 public class GameActivity extends Activity {
 
     private String name1;
     private String name2;
     private int secondeParQuestion;
-    private boolean canClick = false;
     private String question;
 
     private TextView player1;
@@ -76,6 +72,9 @@ public class GameActivity extends Activity {
         secondeParQuestion = getIntent().getExtras().getInt("nombreSecondeQuestion");
         darkMode = getIntent().getExtras().getBoolean("darkMode");
 
+        btVrai1.setEnabled(false);
+        btVrai2.setEnabled(false);
+
         player2.setText(name2);
         player1.setText(name1);
 
@@ -95,12 +94,10 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if (enTrainDeJouer) {
-                    if (canClick) {
-                        if (myQuestion.getQuestion().getReponse() == 1) {
-                            scorePlayer2++;
-                            tvScorePlayer2.setText(String.valueOf(scorePlayer2));
-                            canClick = false;
-                        }
+                    if (myQuestion.getQuestion().getReponse() == 1) {
+                        scorePlayer2++;
+                        tvScorePlayer2.setText(String.valueOf(scorePlayer2));
+                        btVrai2.setEnabled(false);
                     }
                 }
             }
@@ -111,12 +108,10 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if (enTrainDeJouer) {
-                    if (canClick) {
-                        if (myQuestion.getQuestion().getReponse() == 1) {
-                            scorePlayer1++;
-                            tvScorePlayer1.setText(String.valueOf(scorePlayer1));
-                            canClick = false;
-                        }
+                    if (myQuestion.getQuestion().getReponse() == 1) {
+                        scorePlayer1++;
+                        tvScorePlayer1.setText(String.valueOf(scorePlayer1));
+                        btVrai1.setEnabled(false);
                     }
                 }
             }
@@ -126,7 +121,7 @@ public class GameActivity extends Activity {
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                defilQusetion();
+                defilQuestion();
                 btStart.setVisibility(View.GONE);
             }
         });
@@ -151,37 +146,41 @@ public class GameActivity extends Activity {
         });
     }
 
+    /**
+     * relance la partie
+     */
     private void restartGame() {
         myQuestion.restart();
         scorePlayer1 = 0;
         scorePlayer2 = 0;
     }
 
-    public void defilQusetion() {
+    /**
+     * lance la parti
+     */
+    public void defilQuestion() {
         Handler handler = new Handler();
         questionRunnable = new Runnable() {
 
             @Override
             public void run() {
                 myQuestion.rollQuestion();
-
                 if (myQuestion.allQuestionPassed()) {
-                    question1.setText(" fini");
-                    question2.setText(" fini");
+                    question1.setText(" la parti est terminé");
+                    question2.setText(" la parti est terminé");
                     enTrainDeJouer = false;
-                    canClick = false;
 
                     handler.removeCallbacks(this);
                     finiLayout.setVisibility(View.VISIBLE);
                 } else {
                     // code du thread
                     question = myQuestion.getQuestion().getQuestion();
-                    canClick = true;
                     question1.setText(question);
                     question2.setText(question);
+                    btVrai1.setEnabled(true);
+                    btVrai2.setEnabled(true);
 
                     handler.postDelayed(this, 1000L * secondeParQuestion);
-                    canClick = false;
                     myQuestion.removeQuestion();
                 }
             }
@@ -189,6 +188,5 @@ public class GameActivity extends Activity {
         // lance le thread
         handler.postDelayed(questionRunnable, 500);
         enTrainDeJouer = true;
-        canClick = true;
     }
 }
