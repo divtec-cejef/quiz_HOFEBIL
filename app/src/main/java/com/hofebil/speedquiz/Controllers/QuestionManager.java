@@ -1,41 +1,125 @@
 package com.hofebil.speedquiz.Controllers;
 
-import com.hofebil.speedquiz.Models.Question;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
+import com.hofebil.speedquiz.Models.Question;
+import com.hofebil.speedquiz.Models.SpeedQuizSQLiteOpenHelper;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * une classe qui controle les question
+ */
 public class QuestionManager {
-    ArrayList<Question> myQuestion = new ArrayList<>();
-    private int indexQuestion;
-    private int nbQuestionPassed = 0;
+    ArrayList<Question> questionList = new ArrayList<>();
+    ArrayList<Question> questionListCopy = new ArrayList<>();
+    private int indexQuestion = 0;
+    private SpeedQuizSQLiteOpenHelper helper;
 
-    public void addQuestion() {
-        myQuestion.add(new Question("le chocolat peut posséder plusieurs couleurs", 1));
-        myQuestion.add(new Question("une couleur peut posséder plusieurs couleurs", 0));
-        myQuestion.add(new Question("les chats peuvent posséder plusieurs couleurs", 1));
-        myQuestion.add(new Question("l'air peut posséder plusieurs couleurs", 0));
-        myQuestion.add(new Question("une voiture peu posséder plusieurs couleurs", 1));
+    /**
+     * constructeur du controleur
+     *
+     * @param context le context de l'application
+     */
+    public QuestionManager(Context context) {
+        questionList = initQuestionList(context);
+        questionListCopy = (ArrayList<Question>) questionList.clone();
     }
 
+    /**
+     * initialise les question
+     *
+     * @param context le context de l'application
+     * @return une liste de question
+     */
+    private ArrayList<Question> initQuestionList(Context context) {
+        ArrayList<Question> listQuestion = new ArrayList<>();
+         helper = new SpeedQuizSQLiteOpenHelper(context);
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        Cursor cursor = db.query(true, "quiz", new String[]{"idQuiz", "question", "reponse"}, null, null, null, null, "idquiz", null);
+
+        while (cursor.moveToNext()) {
+            listQuestion.add(new Question(cursor));
+        }
+        cursor.close();
+        db.close();
+
+        return listQuestion;
+    }
+
+    /**
+     * ajoute une question dans la base de donnée
+     *
+     * @param question la question
+     * @param reponse  sa reponse
+     */
     public void setQuestion(String question, int reponse) {
-        myQuestion.add(new Question(question, reponse));
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.execSQL("INSERT INTO quiz(question, reponse) VALUES(question, reponse)");
+        questionList.add(new Question(question, reponse));
+        restart();
+        db.close();
     }
 
-    private void choseQuestion() {
-        indexQuestion = (int) (Math.random()* myQuestion.size());
+    /**
+     * change l'index de la question
+     */
+    public void rollQuestion() {
+        indexQuestion = (int) (Math.random() * questionListCopy.size());
     }
 
-    public Question getMyQuestion() {
-        choseQuestion();
-        nbQuestionPassed++;
-        return myQuestion.get(indexQuestion);
+    /**
+     * obtien une question
+     *
+     * @return une question
+     */
+    public Question getQuestion() {
+        Question question = questionListCopy.get(indexQuestion);
+        //      Question question = questionList.get(indexQuestion);
+        return question;
     }
 
+    /**
+     * efface une question
+     */
+    public void removeQuestion() {
+        questionListCopy.remove(indexQuestion);
+    }
+
+    /**
+     * test si la liste de question est vide
+     *
+     * @return vrai si oui, sinon faux
+     */
     public boolean allQuestionPassed() {
-        return nbQuestionPassed >= myQuestion.size();
+        return questionListCopy.size() == 0;
     }
 
-    public void setNbQuestionPassed(int nbQuestionPassed) {
-        this.nbQuestionPassed = nbQuestionPassed;
+    /**
+     * re charge la liste
+     */
+    public void restart() {
+        questionListCopy = (ArrayList<Question>) questionList.clone();
     }
+
+    private Connection connect() {
+        // SQLite connection string
+        String url = "jdbc:sqlite:C://sqlite/db/test.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
+
 }
+
+

@@ -18,5 +18,8 @@
     <string name="again">rejouer</string>
     <string name="start">Commencer !</string>
     <string name="QFaux">faux</string>
-    <string name="QVrau">vrai</string>
+    <string name="QVrai">vrai</string>
+    <string name="QValidate">La question a été ajouter</string>
+    <string name="QNValidate">La question n\'est pas valide</string>
+
 </resources>
